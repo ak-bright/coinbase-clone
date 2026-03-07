@@ -1,31 +1,16 @@
+@import "tailwindcss";
+
+/* Coinbase color scheme custom properties */
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  --coinbase-blue: #0052ff;
+  --coinbase-blue-dark: #0041cc;
+  --coinbase-dark: #0a0b0d;
+  --coinbase-gray: #5b616e;
+  --coinbase-light-gray: #f8f8f8;
 }
 
 body {
   margin: 0;
-  display: flex;
-  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
 }
