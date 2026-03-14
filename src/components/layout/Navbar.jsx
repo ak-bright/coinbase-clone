@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import logo from "../../assets/coinbase-logo.svg";
 import searchIcon from "../../assets/search-icon.svg";
 import languageIcon from "../../assets/world-icon.svg";
@@ -324,7 +325,12 @@ function Navbar() {
           <img src={logo} alt="coinbase logo" className="h-11 w-11 flex-shrink-0" />
 
           {/* Nav menu — ONLY large screens */}
-          <nav className="hidden lg:flex gap-2 xl:gap-4 font-semibold text-lg">
+          <motion.nav
+            className="hidden lg:flex gap-2 xl:gap-4 font-semibold text-lg"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, staggerChildren: 0.1 }}
+          >
             {menuItems.map((item) => (
               <div
                 key={item}
@@ -340,12 +346,26 @@ function Navbar() {
                 </a>
 
                 {/* Dropdown + Blur overlay */}
-                {activeDropdown === item && dropdownData[item] && (
-                  <>
-                    {/* Blur overlay on bottom portion */}
-                    <div className="fixed inset-0 top-[65vh] bg-black/30 backdrop-blur-sm z-40" />
-                    {/* Full-width dropdown */}
-                    <div className="fixed left-0 right-0 top-[72px] z-50 bg-white shadow-2xl border-t border-gray-100" style={{ height: 'calc(65vh - 72px)' }}>
+                <AnimatePresence>
+                  {activeDropdown === item && dropdownData[item] && (
+                    <>
+                      {/* Blur overlay on bottom portion */}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="fixed inset-0 top-[65vh] bg-black/30 backdrop-blur-sm z-40"
+                      />
+                      {/* Full-width dropdown */}
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="fixed left-0 right-0 top-[72px] z-50 bg-white shadow-2xl border-t border-gray-100"
+                        style={{ height: 'calc(65vh - 72px)' }}
+                      >
                       <div className="max-w-screen-2xl mx-auto px-12 py-10 grid grid-cols-3 gap-x-12 gap-y-1 h-full overflow-y-auto">
                         {/* Column 1 */}
                         <div className="space-y-1">
@@ -401,12 +421,13 @@ function Navbar() {
                           </div>
                         )}
                       </div>
-                    </div>
+                    </motion.div>
                   </>
                 )}
+                </AnimatePresence>
               </div>
             ))}
-          </nav>
+          </motion.nav>
         </div>
 
         {/* RIGHT SIDE */}
@@ -448,20 +469,32 @@ function Navbar() {
       </div>
 
       {/* FULLSCREEN MOBILE MENU — ONLY for mobile/tablet */}
-      {menuOpen && (
-        <div className="lg:hidden fixed top-[64px] left-0 w-full h-[calc(100%-64px)] bg-white z-40 flex flex-col items-start p-8 space-y-6 overflow-auto">
-          {menuItems.map((item) => (
-            <a
-              key={item}
-              href="#"
-              className="flex justify-between w-full text-gray-900 font-bold hover:bg-gray-100 rounded-sm text-2xl py-4 border-gray-200"
-            >
-              {item}
-              <img src={arrowIcon} alt="Arrow Icon" className="h-6 w-6" />
-            </a>
-          ))}
-        </div>
-      )}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "calc(100% - 64px)" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="lg:hidden fixed top-[64px] left-0 w-full bg-white z-40 flex flex-col items-start p-8 space-y-6 overflow-hidden"
+          >
+            {menuItems.map((item, i) => (
+              <motion.a
+                key={item}
+                href="#"
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.2, delay: i * 0.05 }}
+                className="flex justify-between w-full text-gray-900 font-bold hover:bg-gray-100 rounded-sm text-2xl py-4 border-gray-200"
+              >
+                {item}
+                <img src={arrowIcon} alt="Arrow Icon" className="h-6 w-6" />
+              </motion.a>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }

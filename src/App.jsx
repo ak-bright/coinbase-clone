@@ -5,8 +5,6 @@ import LandingPage from "./pages/LandingPage.jsx";
 import SignUpPage from "./pages/SignUpPage.jsx";
 import SignInPage from "./pages/SignInPage.jsx";
 
-
-
 function App() {
   return (
     <Router>

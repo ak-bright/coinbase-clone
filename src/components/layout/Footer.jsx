@@ -1,9 +1,23 @@
+import { motion } from "framer-motion";
 import logo from "../../assets/coinbase-logo.svg";
 import instagramIcon from "../../assets/instagram-icon.svg";
-import linkedInIcon from "../../assets/linkedIn-icon.svg";
+import linkedInIcon from "../../assets/linkedin-icon.svg";
 import tiktokIcon from "../../assets/tiktok-icon.svg";
 import xIcon from "../../assets/x-icon.svg";
-import countryIcon from "../../assets/country-icon.svg"
+import countryIcon from "../../assets/country-icon.svg";
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 },
+  },
+};
+
+const fadeUpVariant = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+};
 
 function Footer() {
   return (
@@ -11,18 +25,23 @@ function Footer() {
 
       {/* TOP SECTION: full-width with edge-to-edge border */}
       <div className="w-full ">
-        <div className="max-w-screen-2xl mx-auto px-6 lg:px-12 py-12">
-
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          variants={staggerContainer}
+          className="max-w-screen-2xl mx-auto px-6 lg:px-12 py-12"
+        >
           {/* Columns */}
           <div className="flex flex-col lg:flex-row gap-12">
 
           {/* Logo Column */}
-          <div className="lg:w-auto shrink-0 lg:mr-12">
+          <motion.div variants={fadeUpVariant} className="lg:w-auto shrink-0 lg:mr-12">
             <img src={logo} alt="Coinbase Logo" className="w-16 h-16 object-contain " />
-          </div>
+          </motion.div>
 
           {/* Column 1: Company + Learn */}
-          <div className="flex-1 flex flex-col gap-8 ">
+          <motion.div variants={fadeUpVariant} className="flex-1 flex flex-col gap-8 ">
             <div>
               <h3 className="text-gray-900 font-bold mb-4 ">Company</h3>
               <ul className="space-y-2 text-gray-500 font-medium">
@@ -58,10 +77,10 @@ function Footer() {
                 <li><a href="#" className="transition">Taxes</a></li>
               </ul>
             </div>
-          </div>
+          </motion.div>
 
           {/* Column 3: Individuals + Businesses + Institutions */}
-          <div className="flex-1 flex flex-col gap-8">
+          <motion.div variants={fadeUpVariant} className="flex-1 flex flex-col gap-8">
             <div>
               <h3 className="text-gray-900 font-bold mb-4">Individuals</h3>
               <ul className="space-y-2 text-gray-500 font-medium">
@@ -93,10 +112,10 @@ function Footer() {
                 <li><a href="#" className="transition">Verified Pools</a></li>
               </ul>
             </div>
-          </div>
+          </motion.div>
 
           {/* Column 3: Developers */}
-          <div className="flex-1 flex flex-col gap-8">
+          <motion.div variants={fadeUpVariant} className="flex-1 flex flex-col gap-8">
             <div>
               <h3 className="text-gray-900 font-bold mb-4">Developers</h3>
               <ul className="space-y-2 text-gray-500 font-medium">
@@ -121,10 +140,10 @@ function Footer() {
                 <li><a href="#" className="transition">Derivatives API</a></li>
               </ul>
             </div>
-          </div>
+          </motion.div>
 
           {/* Column 4: Support + Asset Prices + Stock Prices */}
-          <div className="flex-1 flex flex-col gap-8">
+          <motion.div variants={fadeUpVariant} className="flex-1 flex flex-col gap-8">
             <div>
               <h3 className="text-gray-900 font-bold mb-4">Support</h3>
               <ul className="space-y-2 text-gray-500 font-medium">
@@ -160,27 +179,25 @@ function Footer() {
                 <li><a href="#" className="transition">Amazon price</a></li>
               </ul>
             </div>
-          </div>
-
-          </div>
+          </motion.div>
 
           {/* Social Icons */}
-          <div className="flex gap-12 mt-8">
-            <a href="#" className="hover:text-blue-600 transition">
+          <motion.div variants={fadeUpVariant} className="flex gap-12 mt-8">
+            <a href="#" className="hover:text-blue-600 hover:-translate-y-1 transition-all">
               <img src={xIcon} alt="X Icon" className="w-5 h-5" />
             </a>
-            <a href="#" className="hover:text-blue-600 transition">
+            <a href="#" className="hover:text-blue-600 hover:-translate-y-1 transition-all">
               <img src={linkedInIcon} alt="LinkedIn Icon" className="w-5 h-5" />
             </a>
-            <a href="#" className="hover:text-blue-600 transition">
+            <a href="#" className="hover:text-blue-600 hover:-translate-y-1 transition-all">
               <img src={instagramIcon} alt="Instagram Icon" className="w-5 h-5" />
             </a>
-            <a href="#" className="hover:text-blue-600 transition">
+            <a href="#" className="hover:text-blue-600 hover:-translate-y-1 transition-all">
               <img src={tiktokIcon} alt="TikTok Icon" className="w-5 h-5" />
             </a>
+          </motion.div>
           </div>
-
-        </div>
+        </motion.div>
       </div>
 
       {/* BOTTOM SECTION: full-width edge-to-edge border */}
