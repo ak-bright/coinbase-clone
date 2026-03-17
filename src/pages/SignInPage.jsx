@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+
 import logo from "../assets/coinbase-logo.svg";
 
 function SignInPage() {
@@ -33,28 +33,13 @@ function SignInPage() {
             Sign in
           </button>
         </form>
-<<<<<<< HEAD
-        <p className="text-center text-gray-500">
-          Don&apos;t have an account?{" "}
-=======
-
         <p className="text-center text-sm text-gray-500 mt-6">
-          Don't have an account?{" "}
->>>>>>> 2843caa77a53ff891ae4167376ea226feb206f15
+          Don&apos;t have an account?{" "}
           <Link to="/signup" className="text-blue-600 font-semibold hover:underline">
             Sign up
           </Link>
         </p>
-<<<<<<< HEAD
-        <p className="text-center text-gray-500">
-          <Link to="/" className="text-blue-600 hover:underline">
-            ← Back to home
-          </Link>
-        </p>
       </motion.div>
-=======
-      </div>
->>>>>>> 2843caa77a53ff891ae4167376ea226feb206f15
     </div>
   );
 }
