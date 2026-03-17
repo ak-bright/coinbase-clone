@@ -4,7 +4,7 @@ This project is a modern, responsive web application clone of Coinbase, built us
 
 ## View Live Demo
 
-**[Live Project on Netlify](https://coinbase-ak-bright.netlify.app/)**
+**[Live Project on Vercel](https://coinbase-clone-brightak.vercel.app/)**
 
 ## Key Features
 
@@ -66,7 +66,7 @@ To create an optimized production build:
 npm run build
 ```
 
-The compiled build files will be placed in the `dist/` directory, ready to be deployed to any static web hosting service (like Netlify, Vercel, or GitHub Pages).
+The compiled build files will be placed in the `dist/` directory, ready to be deployed to any static web hosting service (like Vercel, Netlify, or GitHub Pages).
 
 ## Project Structure
 
