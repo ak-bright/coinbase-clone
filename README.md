@@ -3,6 +3,7 @@
 This project is a modern, responsive web application clone of Coinbase, built using React and styled with Tailwind CSS. It focuses on delivering a sleek, dynamic user interface with smooth animations and engaging user flows for cryptocurrency trading and portfolio management simulations.
 
 ## View Live Demo
+
 **[Live Project on Netlify](https://coinbase-ak-bright.netlify.app/)**
 
 ## Key Features
@@ -31,11 +32,13 @@ You need to have Node.js and npm installed on your machine.
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/ak-bright/coinbase-clone.git
    ```
 
 2. Navigate to the project directory:
+
    ```bash
    cd coinbase-clone
    ```
@@ -62,6 +65,7 @@ To create an optimized production build:
 ```bash
 npm run build
 ```
+
 The compiled build files will be placed in the `dist/` directory, ready to be deployed to any static web hosting service (like Netlify, Vercel, or GitHub Pages).
 
 ## Project Structure
