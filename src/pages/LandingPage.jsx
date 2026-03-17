@@ -9,6 +9,7 @@ import heroImage7 from "../assets/hero-7.png";
 import coinbaseLogo from "../assets/coinbase-logo.svg";
 import cryptoLogos from "../assets/crypto-logos.png";
 
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 const fadeUpVariant = {
