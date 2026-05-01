@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { useAuth } from "../context/AuthContext";
 import { userAPI, cryptoAPI } from "../services/api";
