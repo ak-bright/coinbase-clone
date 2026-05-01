@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAuth } from "../../context/AuthContext";
 import logo from "../../assets/coinbase-logo.svg";
 import searchIcon from "../../assets/search-icon.svg";
 import languageIcon from "../../assets/world-icon.svg";
@@ -35,6 +36,13 @@ import companyImage from "../../assets/company-imag.png";
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const { isAuthenticated, user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate("/");
+  };
 
   const menuItems = [
     "Cryptocurrencies",
@@ -442,21 +450,48 @@ function Navbar() {
             <img src={languageIcon} alt="Language Icon" className="h-6 w-6" />
           </div>
 
-          {/* Sign in — tablet and up */}
-          <Link
-            to="/signin"
-            className="hidden md:block px-5 py-2 bg-gray-100 font-semibold rounded-full hover:bg-gray-200 hover:text-blue-600 whitespace-nowrap text-lg transition"
-          >
-            Sign in
-          </Link>
+          {isAuthenticated ? (
+            <>
+              {/* Profile link — tablet and up */}
+              <Link
+                to="/profile"
+                className="hidden md:flex items-center gap-2 px-5 py-2 bg-gray-100 font-semibold rounded-full hover:bg-gray-200 hover:text-blue-600 whitespace-nowrap text-lg transition"
+              >
+                <div className="w-6 h-6 bg-blue-600 rounded-full flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">
+                    {user?.name?.charAt(0).toUpperCase() || "U"}
+                  </span>
+                </div>
+                Profile
+              </Link>
 
-          {/* Sign up — always visible */}
-          <Link
-            to="/signup"
-            className="px-5 py-2 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition whitespace-nowrap text-lg"
-          >
-            Sign up
-          </Link>
+              {/* Sign out */}
+              <button
+                onClick={handleLogout}
+                className="px-5 py-2 bg-gray-800 text-white font-semibold rounded-full hover:bg-gray-900 transition whitespace-nowrap text-lg"
+              >
+                Sign out
+              </button>
+            </>
+          ) : (
+            <>
+              {/* Sign in — tablet and up */}
+              <Link
+                to="/signin"
+                className="hidden md:block px-5 py-2 bg-gray-100 font-semibold rounded-full hover:bg-gray-200 hover:text-blue-600 whitespace-nowrap text-lg transition"
+              >
+                Sign in
+              </Link>
+
+              {/* Sign up — always visible */}
+              <Link
+                to="/signup"
+                className="px-5 py-2 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition whitespace-nowrap text-lg"
+              >
+                Sign up
+              </Link>
+            </>
+          )}
 
           {/* Menu — mobile + tablet only */}
           <button

@@ -1,5 +1,4 @@
 import heroImage1 from "../assets/hero-1-image.avif";
-import heroImage2png from "../assets/hero2.png";
 import heroImage2avif from "../assets/hero-2.avif";
 import heroImage3 from "../assets/hero-3.avif";
 import heroImage4 from "../assets/hero-4.avif";
@@ -8,6 +7,7 @@ import heroImage6 from "../assets/hero-6.png";
 import heroImage7 from "../assets/hero-7.png";
 import coinbaseLogo from "../assets/coinbase-logo.svg";
 import cryptoLogos from "../assets/crypto-logos.png";
+import CryptoPriceTable from "../components/CryptoPriceTable";
 
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
@@ -99,19 +99,7 @@ function LandingPage() {
             </motion.div>
           </motion.div>
 
-          <motion.div
-            className="flex-1 w-full"
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <img
-              src={heroImage2png}
-              alt="Crypto Assets List"
-              className="w-full max-w-2xl mx-auto rounded-[2rem] shadow-xl"
-            />
-          </motion.div>
+          <CryptoPriceTable />
         </div>
       </section>
 
