@@ -1,14 +1,14 @@
 import Crypto from "../models/Crypto.js";
 import axios from "axios";
 
-// In-memory cache for CoinGecko data
+// In-memory cache for CoinMarketCap data
 let priceCache = {
   data: null,
   lastFetch: 0,
   TTL: 5 * 60 * 1000, // 5 minutes
 };
 
-// Fetch live prices from CoinGecko
+// Fetch live prices from CoinMarketCap
 const fetchLivePrices = async () => {
   const now = Date.now();
 
@@ -19,24 +19,41 @@ const fetchLivePrices = async () => {
 
   try {
     const response = await axios.get(
-      "https://api.coingecko.com/api/v3/coins/markets",
+      "https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest",
       {
+        headers: {
+          "X-CMC_PRO_API_KEY": process.env.CMC_API_KEY,
+          Accept: "application/json",
+        },
         params: {
-          vs_currency: "usd",
-          order: "market_cap_desc",
-          per_page: 20,
-          page: 1,
-          sparkline: true,
-          price_change_percentage: "24h",
+          start: 1,
+          limit: 20,
+          convert: "USD",
         },
       }
     );
 
-    priceCache.data = response.data;
+    // Transform CMC data into a consistent format for the frontend
+    const transformed = response.data.data.map((coin) => ({
+      id: coin.slug,
+      name: coin.name,
+      symbol: coin.symbol,
+      current_price: coin.quote.USD.price,
+      price_change_percentage_24h: coin.quote.USD.percent_change_24h,
+      market_cap: coin.quote.USD.market_cap,
+      total_volume: coin.quote.USD.volume_24h,
+      image: `https://s2.coinmarketcap.com/static/img/coins/64x64/${coin.id}.png`,
+      cmc_rank: coin.cmc_rank,
+    }));
+
+    priceCache.data = transformed;
     priceCache.lastFetch = now;
-    return response.data;
+    return transformed;
   } catch (error) {
-    console.error("CoinGecko API error:", error.message);
+    console.error(
+      "CoinMarketCap API error:",
+      error.response?.data?.status?.error_message || error.message
+    );
     // Return cached data even if stale, or empty array
     return priceCache.data || [];
   }
@@ -155,7 +172,7 @@ export const addCrypto = async (req, res) => {
   }
 };
 
-// @desc    Get live crypto prices from CoinGecko
+// @desc    Get live crypto prices from CoinMarketCap
 // @route   GET /api/crypto/live-prices
 // @access  Public
 export const getLivePrices = async (req, res) => {

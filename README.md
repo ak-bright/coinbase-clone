@@ -78,4 +78,4 @@ The compiled build files will be placed in the `dist/` directory, ready to be de
 
 ## Contact
 
-Created by [Bright Afatsawo]
+[Bright Afatsawo](https://github.com/ak-bright)
